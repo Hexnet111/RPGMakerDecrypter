@@ -1,6 +1,6 @@
 # RPG Maker Decrypter
 
-This is a fork of the (original project)[https://github.com/uuksu/RPGMakerDecrypter] designed to work better with RPGMakerCompressor.
+This is a fork of the [original project](https://github.com/uuksu/RPGMakerDecrypter) designed to work better with RPGMakerCompressor.
 
 RPG Maker Decrypter can be used to extract encrypted archives and files created with RPG Maker XP, VX VX Ace, MV or MZ. It can be also used to recreate a best guess of the original project.
 
