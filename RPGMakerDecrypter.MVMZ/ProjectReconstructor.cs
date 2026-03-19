@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace RPGMakerDecrypter.MVMZ
@@ -26,16 +27,36 @@ namespace RPGMakerDecrypter.MVMZ
 
         protected abstract void CreateProjectFile(string outputPath);
         
-        public virtual void Reconstruct(string deploymentPath, string outputPath)
+        public virtual void Reconstruct(string deploymentPath, string outputPath, string customDirectories)
         {
+            string[] directoriesToCopy = _directories;
+
+            if (customDirectories != null)
+            {
+                string[] split = customDirectories.Split(',');
+                string[] formatted = new string[split.Length];
+
+                for (int i = 0; i < split.Length; i++)
+                {
+                    string formattedText = split[i].Replace(@"\s+", "");
+                    formatted[i] = formattedText;
+                }
+
+                directoriesToCopy = formatted;
+            }
+
             if (Directory.Exists(outputPath))
             {
                 Directory.Delete(outputPath, true);
                 Directory.CreateDirectory(outputPath);
             }
 
-            foreach (var directory in _directories)
+            foreach (var directory in directoriesToCopy)
             {
+                if (!Directory.Exists(Path.Combine(deploymentPath, directory))) {
+                    continue;
+                }
+
                 CopyDirectory(Path.Combine(deploymentPath, directory), Path.Combine(outputPath, directory));
             }
             

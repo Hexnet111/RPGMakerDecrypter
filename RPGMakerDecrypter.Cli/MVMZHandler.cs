@@ -30,19 +30,21 @@ namespace RPGMakerDecrypter.Cli
                 var workingDirectoryPath = commandLineOptions.InputPath;
                 var deleteEncrypted = false;
 
-                if (commandLineOptions.ReconstructProject)
+                if (commandLineOptions.OutputDirectoryPath != null)
                 {
                     switch (version)
                     {
                         case RPGMakerVersion.MV:
                             new MVProjectReconstructor().Reconstruct(
                                 commandLineOptions.InputPath,
-                                commandLineOptions.OutputDirectoryPath);
+                                commandLineOptions.OutputDirectoryPath,
+                                commandLineOptions.Directories);
                             break;
                         case RPGMakerVersion.MZ:
                             new MZProjectReconstructor().Reconstruct(
                                 commandLineOptions.InputPath,
-                                commandLineOptions.OutputDirectoryPath);
+                                commandLineOptions.OutputDirectoryPath,
+                                commandLineOptions.Directories);
                             break;
                     }
 
@@ -52,7 +54,7 @@ namespace RPGMakerDecrypter.Cli
                 }
 
                 var encryptionKeyFinder = new EncryptionKeyFinder();
-                var encryptionKey = encryptionKeyFinder.FindKey(workingDirectoryPath);
+                var encryptionKey = encryptionKeyFinder.FindKey(commandLineOptions.InputPath);
 
                 switch (version)
                 {

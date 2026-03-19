@@ -23,7 +23,7 @@ namespace RPGMakerDecrypter.Cli
                 {
                     Environment.Exit(1);
                 }
-                
+
                 var version = RGSSAD.RGSSAD.GetRPGMakerVersion(_commandLineOptions.InputPath);
                 if (version == RPGMakerVersion.Unknown)
                 {
