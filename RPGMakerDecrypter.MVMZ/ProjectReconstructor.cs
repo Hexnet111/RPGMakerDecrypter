@@ -63,6 +63,11 @@ namespace RPGMakerDecrypter.MVMZ
             
             foreach (var file in filesToCopy)
             {
+                if (!File.Exists(Path.Combine(deploymentPath, file)))
+                {
+                    continue;
+                }
+
                 File.Copy(Path.Combine(deploymentPath, file), Path.Combine(outputPath, file));
             }
             
