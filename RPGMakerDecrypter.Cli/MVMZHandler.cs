@@ -38,13 +38,15 @@ namespace RPGMakerDecrypter.Cli
                             new MVProjectReconstructor().Reconstruct(
                                 commandLineOptions.InputPath,
                                 commandLineOptions.OutputDirectoryPath,
-                                commandLineOptions.Directories);
+                                commandLineOptions.Directories,
+                                commandLineOptions.Files);
                             break;
                         case RPGMakerVersion.MZ:
                             new MZProjectReconstructor().Reconstruct(
                                 commandLineOptions.InputPath,
                                 commandLineOptions.OutputDirectoryPath,
-                                commandLineOptions.Directories);
+                                commandLineOptions.Directories,
+                                commandLineOptions.Files);
                             break;
                     }
 

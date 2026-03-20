@@ -5,7 +5,7 @@ namespace RPGMakerDecrypter.MVMZ.MV
 {
     public class MVProjectReconstructor : ProjectReconstructor
     {
-        public override void Reconstruct(string deploymentPath, string outputPath, string customDirectories)
+        public override void Reconstruct(string deploymentPath, string outputPath, string customDirectories, string customFiles)
         {
             // Windows, Linux and Web and Android/iOS deployments have a separate www-directory
             var dataFilesPath = Path.Combine(deploymentPath, "www");
@@ -20,7 +20,7 @@ namespace RPGMakerDecrypter.MVMZ.MV
             }
             
             // www-directory essentially contains the project files
-            base.Reconstruct(dataFilesPath, outputPath, customDirectories);
+            base.Reconstruct(dataFilesPath, outputPath, customDirectories, customFiles);
         }
 
         protected override void CreateProjectFile(string outputPath)

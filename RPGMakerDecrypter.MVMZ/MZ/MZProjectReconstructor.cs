@@ -5,7 +5,7 @@ namespace RPGMakerDecrypter.MVMZ.MZ
 {
     public class MZProjectReconstructor : ProjectReconstructor
     {
-        public override void Reconstruct(string deploymentPath, string outputPath, string customDirectories)
+        public override void Reconstruct(string deploymentPath, string outputPath, string customDirectories, string customFiles)
         {
             // Windows, Linux and Web and Android/iOS deployments all files are in root of the deployment
             var dataFilesPath = deploymentPath;
@@ -19,7 +19,7 @@ namespace RPGMakerDecrypter.MVMZ.MZ
                 dataFilesPath = Path.Combine(macOSBundleDirectory, Constants.MacOSBundleDirectory);
             }
             
-            base.Reconstruct(dataFilesPath, outputPath, customDirectories);    
+            base.Reconstruct(dataFilesPath, outputPath, customDirectories, customFiles);    
         }
         
         protected override void CreateProjectFile(string outputPath)

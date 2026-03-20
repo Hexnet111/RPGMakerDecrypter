@@ -16,7 +16,10 @@ namespace RPGMakerDecrypter.Cli
         [Option('w', "overwrite", Required = false, HelpText = "If set to true, destination files are overwritten.")]
         public bool Overwrite { get; set; }
 
-        [Option('d', "directories", Required = false, HelpText = "Overwrite the default behavior and give a specific set of directories to decrypt/encrypt. Invalid directories are automatically ignored.")]
+        [Option('d', "directories", Required = false, HelpText = "Overwrite the default behavior and give a specific set of directories to decrypt. Invalid directories are automatically ignored.")]
         public string Directories { get; set; }
+
+        [Option('f', "files", Required = false, HelpText = "Overwrite the default behavior and give a specific set of files to decrypt. Invalid directories are automatically ignored.")]
+        public string Files { get; set; }
     }
 }

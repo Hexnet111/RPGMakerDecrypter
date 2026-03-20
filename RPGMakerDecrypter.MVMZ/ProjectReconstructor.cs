@@ -26,24 +26,25 @@ namespace RPGMakerDecrypter.MVMZ
         };
 
         protected abstract void CreateProjectFile(string outputPath);
-        
-        public virtual void Reconstruct(string deploymentPath, string outputPath, string customDirectories)
+
+        private string[] ParseString(string input)
         {
-            string[] directoriesToCopy = _directories;
+            string[] split = input.Split(',');
+            string[] formatted = new string[split.Length];
 
-            if (customDirectories != null)
+            for (int i = 0; i < split.Length; i++)
             {
-                string[] split = customDirectories.Split(',');
-                string[] formatted = new string[split.Length];
-
-                for (int i = 0; i < split.Length; i++)
-                {
-                    string formattedText = split[i].Replace(@"\s+", "");
-                    formatted[i] = formattedText;
-                }
-
-                directoriesToCopy = formatted;
+                string formattedText = split[i].Replace(@"\s+", "");
+                formatted[i] = formattedText;
             }
+
+            return formatted;
+        }
+        
+        public virtual void Reconstruct(string deploymentPath, string outputPath, string customDirectories, string customFiles)
+        {
+            string[] directoriesToCopy = customDirectories != null ? ParseString(customDirectories) : _directories;
+            string[] filesToCopy = customFiles != null ? ParseString(customFiles) : _files;
 
             if (Directory.Exists(outputPath))
             {
@@ -60,7 +61,7 @@ namespace RPGMakerDecrypter.MVMZ
                 CopyDirectory(Path.Combine(deploymentPath, directory), Path.Combine(outputPath, directory));
             }
             
-            foreach (var file in _files)
+            foreach (var file in filesToCopy)
             {
                 File.Copy(Path.Combine(deploymentPath, file), Path.Combine(outputPath, file));
             }
